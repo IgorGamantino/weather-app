@@ -1,5 +1,6 @@
 import * as S from "./styles"
 
+import SunLogo from '../../assets/Sun-icon.svg'
 export function Home () {
   return (
     <S.Container>
@@ -9,6 +10,8 @@ export function Home () {
       <S.Title>
         Container Home
       </S.Title>
+
+      <SunLogo />
     </S.Container>
   )
 }
