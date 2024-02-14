@@ -1,9 +1,15 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import {LinearGradient} from 'expo-linear-gradient';
+
+type ModeNight = {
+  isModeNight: boolean;
+}
+
 
 export const Container = styled.View`
   flex: 1;
   padding-top:80px;
+  width: 100%;
   padding-bottom:30px;
   justify-content: center;
   align-items: center;
@@ -33,30 +39,36 @@ font-size: 18px;
 color: #fff;
 `;
 
-export const WrapperCondition = styled.View`
+export const WrapperCondition = styled.View<ModeNight>`
  height: 47px;
  margin-top: 20px;
  border-radius: 20px;
  width: 100%;
- background-color: rgba(0,128,255,0.5);
+
  flex-direction: row;
  align-items: center;
  paddingHorizontal: 15px;
  justify-content: space-between;
+  
+ ${({isModeNight}) => css`
+ background-color: ${isModeNight ?  "rgba(8,36,79,0.5)" : "rgba(0,128,255,0.5)"};
+ ` }
+
 `;
 
 export const TextCondition = styled.Text``;
 
-
-export const WrapperTodayAllCondition = styled.View`
+export const WrapperTodayAllCondition = styled.View<ModeNight>`
  height: 217px;
  margin-top: 20px;
  border-radius: 20px;
  width: 100%;
- background-color: rgba(0,128,255,0.5);
- 
+
  padding: 15px;
 
+ ${({isModeNight}) => css`
+ background-color: ${isModeNight ?  "rgba(8,36,79,0.5)" : "rgba(0,128,255,0.5)"};
+ ` }
 `;
 
 export const WrapperDayNow = styled.View`
@@ -106,11 +118,13 @@ export const TextHour = styled.Text`
 `;
 
 
-export const WrapperNextForecast = styled.View`
+export const WrapperNextForecast = styled.View<ModeNight>`
  margin-top: 20px;
  border-radius: 20px;
  width: 100%;
- background-color: rgba(0,128,255,0.5);
+ ${({isModeNight}) => css`
+ background-color: ${isModeNight ?  "rgba(8,36,79,0.5)" : "rgba(0,128,255,0.5)"};
+ ` }
  padding: 15px;
 `;
 
@@ -128,13 +142,11 @@ export const TextDayList = styled.Text`
  color: #fff;
  font-size: 18px;
  font-weight: bold;
-
 `;
 
 
 export const TextTemperatureList = styled.Text`
   color: #fff;
   font-size: 18px;
-  font-weight: 500
-
+  font-weight: 500;
 `;

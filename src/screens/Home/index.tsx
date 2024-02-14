@@ -4,15 +4,27 @@ import SunLogo from '../../assets/Sun-icon.svg'
 import DayCloudLogo from '../../assets/DayClouds.svg'
 import CalendarLogo from '../../assets/calendar.svg'
 
-import { BackdropBlur, Canvas, Fill } from '@shopify/react-native-skia'
-import { ScrollView } from "react-native"
+import { SafeAreaView, ScrollView } from "react-native"
+import { useContext } from "react"
+import { AlterColorsContext } from "../../context/AlterColorsContext"
+import { Input } from "../../components/Search/styled"
+import { Search } from "../../components/Search"
 export function Home() {
+  const {hoursNow} = useContext(AlterColorsContext);
+
+
+
+  const isModeNight = hoursNow >= 18;
   return (
-    <ScrollView>
+    <>
+     
       <S.Linear
-        colors={['#7abcff', '#59abf8', '#4096ee']}
+        colors={isModeNight ? ["#08244F","#134CB5","#0B42AB"]: ['#7abcff', '#59abf8', '#4096ee']}
       />
+
+
       <S.Container>
+          <Search />
         <SunLogo width={200} height={200} />
         <S.Title>
           28º
@@ -21,14 +33,15 @@ export function Home() {
         <S.PrecipitationsText>Precipitations</S.PrecipitationsText>
         <S.PrecipitationsText>Max: 34 Min: 28</S.PrecipitationsText>
 
+      <ScrollView>
 
-        <S.WrapperCondition>
+        <S.WrapperCondition isModeNight={isModeNight}>
           <S.PrecipitationsText>18%</S.PrecipitationsText>
           <S.PrecipitationsText>18%</S.PrecipitationsText>
           <S.PrecipitationsText>18%</S.PrecipitationsText>
         </S.WrapperCondition>
 
-        <S.WrapperTodayAllCondition>
+        <S.WrapperTodayAllCondition isModeNight={isModeNight}>
           <S.WrapperDayNow>
             <S.TextDayNow>Today</S.TextDayNow>
             <S.TextDay>Mar,10</S.TextDay>
@@ -86,7 +99,7 @@ export function Home() {
         </S.WrapperTodayAllCondition>
 
 
-        <S.WrapperNextForecast>
+        <S.WrapperNextForecast isModeNight={isModeNight}>
           <S.WrapperDayNow>
             <S.TextDayNow>Next Forecast</S.TextDayNow>
             <CalendarLogo width={24} height={24} />
@@ -142,7 +155,8 @@ export function Home() {
             <S.TextTemperatureList>13</S.TextTemperatureList>
           </S.WrapperListDay>
         </S.WrapperNextForecast>
+        </ScrollView>
       </S.Container>
-    </ScrollView>
+    </>
   )
 }
