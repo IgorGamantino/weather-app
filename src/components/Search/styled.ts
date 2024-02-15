@@ -1,5 +1,9 @@
-import styled from "styled-components/native";
+import { SharedValue } from "react-native-reanimated";
+import styled, { css } from "styled-components/native";
 
+type ButtonProps ={
+  isActiveAnimation: boolean
+}
 export const Container = styled.View`
 
   width: 100%;
@@ -9,15 +13,27 @@ export const Container = styled.View`
 `
 ;
 
-export const ButtonSearch = styled.TouchableHighlight`
+export const ButtonSearch = styled.TouchableHighlight<ButtonProps>`
   width: 40px;
+  background-color: #ffff;
+  opacity: 0.5;
+  justify-content: center;
   height: 40px;
-  margin-left: 10px;
+  padding-right:10px;
+
+  
+
+  ${({isActiveAnimation}) => css`
+    border-radius: ${isActiveAnimation ? "0px" : "20px"};
+      border-top-right-radius: 20px;
+       border-bottom-right-radius: 20px;
+  `}
 `;
 export const Input = styled.TextInput`
   width: 100%;
   padding: 10px;
-  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   height: 40px;
   background-color: #ffff;
 `;
