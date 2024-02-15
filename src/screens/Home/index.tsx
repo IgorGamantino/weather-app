@@ -5,15 +5,14 @@ import DayCloudLogo from '../../assets/DayClouds.svg'
 import CalendarLogo from '../../assets/calendar.svg'
 
 import { SafeAreaView, ScrollView } from "react-native"
-import { useContext } from "react"
-import { AlterColorsContext } from "../../context/AlterColorsContext"
+import { useContext, useState } from "react"
 import { Input } from "../../components/Search/styled"
 import { Search } from "../../components/Search"
 export function Home() {
-  const {hoursNow} = useContext(AlterColorsContext);
+  const [inputValue,setInputValue]= useState('');
 
 
-
+const hoursNow = new Date().getHours();
   const isModeNight = hoursNow >= 18;
   return (
     <>
@@ -24,7 +23,7 @@ export function Home() {
 
 
       <S.Container>
-          <Search />
+          <Search value={inputValue} onChangeText={setInputValue}/>
         <SunLogo width={200} height={200} />
         <S.Title>
           28º

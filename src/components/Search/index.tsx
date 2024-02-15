@@ -3,7 +3,15 @@ import React, { useState } from "react";
 
 import {  Text } from "react-native";
 import Animated,{useAnimatedStyle, useSharedValue, withTiming,Easing} from "react-native-reanimated";
-export function Search() {
+
+type SearchProps = {
+  value: string;
+  onChangeText: ((text: string) => void) | undefined
+}
+
+
+export function Search({value,onChangeText}:SearchProps) {
+  
   const [isActiveInput,setIsActiveInput]=useState(false)
 
   const widthButton = useSharedValue(0);
@@ -26,7 +34,7 @@ export function Search() {
       <Animated.View
       style={[{ width: 100,opacity:0,flexDirection:"row" }, style]}
       >
-      <S.Input />
+      <S.Input value={value} onChangeText={onChangeText}/>
       </Animated.View>
    
       <S.ButtonSearch isActiveAnimation={isActiveInput} onPress={() => {
