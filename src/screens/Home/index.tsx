@@ -9,14 +9,15 @@ import HumidityLogo from '../../assets/humidity.svg'
 import {  ScrollView } from "react-native"
 import { useEffect, useState } from "react"
 import * as Location from 'expo-location';
-
-
+ 
+import {SvgUri } from 'react-native-svg'
 import { Search } from "../../components/Search"
 import { api } from "../../services/api"
 import { SECRET_API_KEY } from "../../services/SECRET_API_KEY"
 import { converterMetersForKilometer } from "../../utils/convertMetersForKilometer"
 import { convertkelvinToCelsius } from "../../utils/converterKelvinToCelsius"
 import { formattedDataToString } from "../../utils/formattedData"
+import { ReturnImageRef } from "../../utils/imagesReturns"
 
 
 export function Home() {
@@ -25,7 +26,7 @@ export function Home() {
   });
 
 
-  console.log(location.forecast)
+  
 
 const hoursNow = new Date().getHours();
   const isModeNight = hoursNow >= 18;
@@ -68,7 +69,7 @@ const hoursNow = new Date().getHours();
       <S.Container>
           <Search value={inputValue} onChangeText={setInputValue}/>
           <S.NameCity>{location.current?.name}</S.NameCity>
-        <SunLogo width={200} height={200} />
+         <ReturnImageRef weather={location.current?.weather[0].main} />
         <S.Title>
           {convertkelvinToCelsius(location.current?.main.temp).toFixed(0)}º
         </S.Title>
