@@ -26,6 +26,12 @@ export const Linear = styled(LinearGradient)`
   height: 100%;
 `;
 
+export const NameCity = styled.Text`
+ font-size: 50px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;`;
+
 export const Title = styled.Text`
   font-size: 64px;
   font-weight: bold;
@@ -37,6 +43,7 @@ export const Title = styled.Text`
 export const PrecipitationsText = styled.Text`
 font-size: 18px;
 color: #fff;
+font-weight:bold;
 `;
 
 export const WrapperCondition = styled.View<ModeNight>`
