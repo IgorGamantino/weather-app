@@ -4,6 +4,7 @@ import { GooglePlaceData, GooglePlaceDetail, GooglePlacesAutocomplete } from 're
 
 import {  Text } from "react-native";
 import Animated,{useAnimatedStyle, useSharedValue, withTiming,Easing} from "react-native-reanimated";
+import { API_GOOGLE_MAP } from "../../services/SECRET_API_KEY";
 
 type SearchProps = {
   onChangeText: (value:any) => void;
@@ -49,7 +50,7 @@ export function Search({onChangeText}:SearchProps) {
         }}
         onPress={OnchangeTextInput}
         query={{
-          key: 'AIzaSyArwc0gphV2TKgd5KXqylNOHEP2gip7YCI',
+          key: API_GOOGLE_MAP,
           language:'pt-BR'
         }}
         />
