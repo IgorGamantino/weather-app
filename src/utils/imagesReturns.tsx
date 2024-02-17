@@ -11,27 +11,30 @@ import Otherday from  "../assets/NightClouds.svg";
 
 type Props ={
   weather: string
+  widht?: number;
 }
 
-export function ReturnImageRef ({weather}:Props){
+export function ReturnImageRef ({weather,widht=40}:Props){
 
-    const isNight= new Date().getHours() >= 18; 
+  if(!weather)return;
+
+    const isNight= new Date().getHours() >=18; 
 
   if(isNight){
-    if(weather === 'Thunderstorm')return <Nightthunderstorm  width={200} height={200} />;
-    if(weather === 'Rain')return <Nightrain  width={200} height={200} />;
-    if(weather === 'Clear')return <Nightclear  width={200} height={200} />;
-    if(weather === 'Clouds') return  <Nightclouds  width={200} height={200}/>;
+    if(weather === 'Thunderstorm')return <Nightthunderstorm  width={widht} height={widht} />;
+    if(weather === 'Rain')return <Nightrain  width={widht} height={widht} />;
+    if(weather === 'Clear')return <Nightclear  width={widht} height={widht} />;
+    if(weather === 'Clouds') return  <Nightclouds  width={widht} height={widht}/>;
     else{
-      return  <Nightclouds  width={200} height={200}/>;
+      return  <Otherday  width={widht} height={widht}/>;
     }
   }else{
-    if(weather === 'Thunderstorm')return <Daythunderstorm width={200} height={200}/>;
-    if(weather === 'Rain')return <Dayrain  width={200} height={200}/>;
-    if(weather === 'Clear')return <Dayclear width={200} height={200}/>;
-    if(weather === 'Clouds') return <Dayclouds width={200} height={200}/>
+    if(weather === 'Thunderstorm')return <Daythunderstorm width={widht} height={widht}/>;
+    if(weather === 'Rain')return <Dayrain  width={widht} height={widht}/>;
+    if(weather === 'Clear')return <Dayclear width={widht} height={widht}/>;
+    if(weather === 'Clouds') return <Dayclouds width={widht} height={widht}/>
     else{
-      return <Dayclouds width={200} height={200}/>
+      return <Othernight width={widht} height={widht}/>
     }
   }
 }

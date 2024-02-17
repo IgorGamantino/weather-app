@@ -21,7 +21,7 @@ import { ReturnImageRef } from "../../utils/imagesReturns"
 
 
 export function Home() {
-  const [inputValue,setInputValue]= useState('');
+  const [inputValue,setInputValue]= useState({});
   const [location, setLocation] = useState({
   });
 
@@ -60,6 +60,30 @@ const hoursNow = new Date().getHours();
       },[])
 
 
+
+
+
+      useEffect(() => {
+          async function GetLocationUserByChangeInput() {
+            if(!inputValue?.detail?.terms[0].value)return;
+            try {
+              const [current,forecast] = await Promise.all([
+                await api.get(`data/2.5/weather?q=${inputValue?.detail?.terms[0].value}&${inputValue?.detail?.terms[1].value}&appid=${SECRET_API_KEY}`).then((data)=> data.data),
+                 await api.get(`data/2.5/forecast?q=${inputValue?.detail?.terms[0].value}&${inputValue?.detail?.terms[1].value}&cnt=24&appid=${SECRET_API_KEY}`).then((data)=> data.data),
+              ])
+              setLocation({
+                current,
+                forecast
+              })
+
+            } catch (error) {
+                console.log(error)
+            }
+          }
+          GetLocationUserByChangeInput()
+          
+      },[inputValue])
+
   return (
     <>
      
@@ -67,9 +91,9 @@ const hoursNow = new Date().getHours();
         colors={isModeNight ? ["#08244F","#134CB5","#0B42AB"]: ['#7abcff', '#59abf8', '#4096ee']}
       />
       <S.Container>
-          <Search value={inputValue} onChangeText={setInputValue}/>
+          <Search  onChangeText={setInputValue}/>
           <S.NameCity>{location.current?.name}</S.NameCity>
-         <ReturnImageRef weather={location.current?.weather[0].main} />
+         <ReturnImageRef weather={ location.current?.weather[0]?.main}  widht={200}/>
         <S.Title>
           {convertkelvinToCelsius(location.current?.main.temp).toFixed(0)}º
         </S.Title>
@@ -152,8 +176,7 @@ const hoursNow = new Date().getHours();
           {location.forecast?.list.map(weather => (
             <S.WrapperListDay key={weather.dt}>
             <S.TextDayList>{formattedDataToString(weather.dt_txt)}</S.TextDayList>
-            <DayCloudLogo width={40} height={40} />
-
+            <ReturnImageRef weather={ weather.weather[0]?.main} />
             <S.TextTemperatureList>{convertkelvinToCelsius(weather?.main.temp).toFixed(0)}º</S.TextTemperatureList>
           </S.WrapperListDay>
           ))}

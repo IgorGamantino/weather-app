@@ -1,16 +1,24 @@
 import * as S from "./styled"
 import React, { useState } from "react";
+import { GooglePlaceData, GooglePlaceDetail, GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
 import {  Text } from "react-native";
 import Animated,{useAnimatedStyle, useSharedValue, withTiming,Easing} from "react-native-reanimated";
 
 type SearchProps = {
-  value: string;
-  onChangeText: ((text: string) => void) | undefined
+  onChangeText: (value:any) => void;
 }
 
 
-export function Search({value,onChangeText}:SearchProps) {
+
+export function Search({onChangeText}:SearchProps) {
+
+  function OnchangeTextInput (data:GooglePlaceData,detail:GooglePlaceDetail | null ){
+    const value = {
+      detail
+    }
+    onChangeText(value)
+}
   
   const [isActiveInput,setIsActiveInput]=useState(false)
 
@@ -34,7 +42,17 @@ export function Search({value,onChangeText}:SearchProps) {
       <Animated.View
       style={[{ width: 100,opacity:0,flexDirection:"row" }, style]}
       >
-      <S.Input value={value} onChangeText={onChangeText}/>
+        <GooglePlacesAutocomplete
+        placeholder="Search city"
+        GooglePlacesDetailsQuery={{
+          fields: 'Geometry'
+        }}
+        onPress={OnchangeTextInput}
+        query={{
+          key: 'AIzaSyArwc0gphV2TKgd5KXqylNOHEP2gip7YCI',
+          language:'pt-BR'
+        }}
+        />
       </Animated.View>
    
       <S.ButtonSearch isActiveAnimation={isActiveInput} onPress={() => {
