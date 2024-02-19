@@ -4,8 +4,6 @@ import {LinearGradient} from 'expo-linear-gradient';
 type ModeNight = {
   isModeNight: boolean;
 }
-
-
 export const Container = styled.View`
   flex: 1;
   padding-top:80px;
@@ -27,7 +25,8 @@ export const Linear = styled(LinearGradient)`
 `;
 
 export const NameCity = styled.Text`
- font-size: 50px;
+ font-size: 40px;
+ margin-top:10px;
   font-weight: bold;
   color: #fff;
   margin-bottom: 10px;`;

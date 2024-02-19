@@ -1,4 +1,3 @@
-import { SharedValue } from "react-native-reanimated";
 import styled, { css } from "styled-components/native";
 
 type ButtonProps ={
@@ -18,10 +17,8 @@ export const ButtonSearch = styled.TouchableHighlight<ButtonProps>`
   background-color: #ffff;
   opacity: 0.5;
   justify-content: center;
-  height: 40px;
-  padding-right:10px;
-
-  
+  height: 44px;
+  align-items: center;
 
   ${({isActiveAnimation}) => css`
     border-radius: ${isActiveAnimation ? "0px" : "20px"};

@@ -1,17 +1,17 @@
 export function formattedDataToString(date:string) {
   const diasDaSemana = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  const dataHora = new Date(date);
+  const dateHours = new Date(date);
 
-  const diaDaSemana = diasDaSemana[dataHora.getUTCDay()];
+  const daysWeek = diasDaSemana[dateHours.getUTCDay()];
 
-  const diaDoMes = dataHora.getUTCDate();
+  const dayMonth = dateHours.getUTCDate();
 
-  const horaMinutos = `${String(dataHora.getUTCHours()).padStart(2, '0')}:${String(dataHora.getUTCMinutes()).padStart(2, '0')}`;
+  const horaMinutos = `${String(dateHours.getUTCHours()).padStart(2, '0')}:${String(dateHours.getUTCMinutes()).padStart(2, '0')}`;
 
-  const resultado = `${diaDaSemana}, ${String(diaDoMes).padStart(2, '0')}, ${horaMinutos}`;
+  const result = `${daysWeek}, ${String(dayMonth).padStart(2, '0')}, ${horaMinutos}`;
 
-  return resultado;
+  return result;
 }
 
 

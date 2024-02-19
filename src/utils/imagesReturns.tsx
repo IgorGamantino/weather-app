@@ -12,15 +12,15 @@ import Otherday from  "../assets/NightClouds.svg";
 type Props ={
   weather: string
   widht?: number;
+  date: number;
 }
 
-export function ReturnImageRef ({weather,widht=40}:Props){
+export function ReturnImageRef ({weather,widht=40, date}:Props){
 
   if(!weather)return;
 
-    const isNight= new Date().getHours() >=18; 
 
-  if(isNight){
+  if(date <= 6 && date >= 18){
     if(weather === 'Thunderstorm')return <Nightthunderstorm  width={widht} height={widht} />;
     if(weather === 'Rain')return <Nightrain  width={widht} height={widht} />;
     if(weather === 'Clear')return <Nightclear  width={widht} height={widht} />;
@@ -28,7 +28,8 @@ export function ReturnImageRef ({weather,widht=40}:Props){
     else{
       return  <Otherday  width={widht} height={widht}/>;
     }
-  }else{
+  }
+  else{
     if(weather === 'Thunderstorm')return <Daythunderstorm width={widht} height={widht}/>;
     if(weather === 'Rain')return <Dayrain  width={widht} height={widht}/>;
     if(weather === 'Clear')return <Dayclear width={widht} height={widht}/>;
